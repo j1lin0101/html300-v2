@@ -8,6 +8,7 @@ export default {
   },
   data() {
     return {
+      // Image Data - Title, Description, Image, URL
       images: [
         {
           id: 1,
@@ -42,6 +43,7 @@ export default {
 
     <h3>Hot Memes</h3>
     <div class="row row-cols-1 row-cols-sm-2 row-cols-md-3 g-3" v-if="images">
+      <!-- Call Image component and sync with data -->
       <hot-image
         v-for="image in images"
         v-bind:image="image"
