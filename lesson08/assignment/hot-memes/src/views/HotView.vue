@@ -1,66 +1,57 @@
-<template>
-  <div class="container py-4">
-    <h1>Hottest Memes of the Week</h1>
-
-    <h3>Highlights</h3>
-
-    <h3>Other Hot Memes</h3>
-    <div class="row row-cols-1 row-cols-sm-2 row-cols-md-3 g-3">
-      <div
-        class="col"
-        v-for="image in images"
-        v-bind:image="image"
-        v-bind:key="image.id"
-      >
-        <div class="card shadow-sm">
-          <img v-bind:src="image.src" class="d-block w-50 img-fluid mx-auto" />
-
-          <div class="card-body">
-            <p class="card-text">
-              This is a place holder meme taken from (Source)
-            </p>
-            <div class="d-flex justify-content-between align-items-center">
-              <div class="btn-group">
-                <a v-bind:href="image.src"
-                  ><button
-                    type="button"
-                    class="btn btn-sm btn-outline-secondary"
-                  >
-                    View
-                  </button></a
-                >
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
-    </div>
-  </div>
-</template>
-
 <script>
+import HotImage from "../components/HotImage.vue";
+
 export default {
   name: "HotView",
+  components: {
+    HotImage,
+  },
   data() {
     return {
       images: [
         {
           id: 1,
           src: "../../images/ceo.jpg",
-          description: "CEO Meme",
+          title: "CEO Meme",
+          alt: "A meme with various popular CEOs",
+          description: "A meme with various popular CEOs",
         },
         {
           id: 2,
           src: "../../images/2010/knee.jpeg",
-          description: "Arrow to the Knee",
+          title: "Arrow to the Knee",
+          alt: "A classic meme of taking an arrow to the knee",
+          description: "A classic meme of taking an arrow to the knee",
         },
         {
           id: 3,
           src: "../../images/2010/morpheus.jpeg",
-          description: "Morpheus",
+          title: "Morpheus",
+          alt: "A classic meme of the Matrix's Morpheus",
+          description: "A classic meme of the Matrix's Morpheus",
         },
       ],
     };
   },
 };
 </script>
+
+<template>
+  <div class="container py-4">
+    <h1>Hottest Memes of the Week</h1>
+
+    <h3>Hot Memes</h3>
+    <div class="row row-cols-1 row-cols-sm-2 row-cols-md-3 g-3" v-if="images">
+      <hot-image
+        v-for="image in images"
+        v-bind:image="image"
+        v-bind:key="image.id"
+        v-bind:imageTitle="image.title"
+        v-bind:imageSrc="image.src"
+        v-bind:imageAlt="image.alt"
+        v-bind:imageDescription="image.description"
+      >
+      </hot-image>
+    </div>
+  </div>
+</template>
