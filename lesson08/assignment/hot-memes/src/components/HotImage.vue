@@ -1,10 +1,23 @@
 <script>
-import showHide from "../mixins/showHide";
+const toggleMixin = {
+  data() {
+    return {
+      toggled: false,
+    };
+  },
+
+  methods: {
+    toggledBorder() {
+      this.toggled = !this.toggled;
+    },
+  },
+};
+
 // Create Image component for Hot Memes Page
 export default {
   name: "hot-image",
   props: ["imageTitle", "imageSrc", "imageAlt", "imageDescription"],
-  mixins: [showHide],
+  mixins: [toggleMixin],
 };
 </script>
 
@@ -15,7 +28,7 @@ export default {
         :src="imageSrc"
         :alt="imageAlt"
         class="d-block w-50 img-fluid mx-auto"
-        :class="isHidden ? 'image-border' : 'no-border'"
+        v-bind:class="{ toggled: toggled }"
       />
     </div>
     <div class="card-text">
@@ -24,9 +37,9 @@ export default {
         <p>{{ imageDescription }}</p>
         <div class="btn-group">
           <button
-            @click="toggleShowHide"
             type="button"
             class="btn btn-sm btn-outline-secondary"
+            @click="toggledBorder"
           >
             Click for a Surprise
           </button>
@@ -37,11 +50,7 @@ export default {
 </template>
 
 <style>
-.image-border {
-  border: 1px solid red;
-}
-
-.no-border {
-  border: none;
+.toggled {
+  border: 20px solid red;
 }
 </style>
